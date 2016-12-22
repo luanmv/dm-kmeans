@@ -7,11 +7,20 @@ objects 	= 100
 attributes 	= 5
 continuar 	= True
 
-# Funcion para llenar los centroides iniciales
-def centroidesIniciales(centroides):
+# Funcion para iniciar las estructuras
+def iniciarEstructuras(centroides, objetos, orden1, orden2, matrizCluster):
 	for i in xrange(clusters):
 		centroides.append([0] * attributes)
 
+	for i in xrange(objects):
+		objetos.append([0] * attributes)
+		orden1.append([0])
+		orden2.append([0])
+		matrizCluster.append([0] * clusters)
+
+
+# Funcion para llenar los centroides iniciales
+def centroidesIniciales(centroides):
 	for x in xrange(clusters):
 		for y in xrange(attributes):
 			centroides[x][y] = random.randint(1, 15)
@@ -19,9 +28,6 @@ def centroidesIniciales(centroides):
 
 # Funcion para llenar los objetos iniciales
 def objetosIniciales(objetos):
-	for i in xrange(objects):
-		objetos.append([0] * attributes)
-
 	for x in xrange(objects):
 		for y in xrange(attributes):
 			objetos[x][y] = random.randint(1, 150)
@@ -29,15 +35,11 @@ def objetosIniciales(objetos):
 # Funcion para llenar el orden de los cluster iniciales
 def ordenInicial(orden1):
 	for x in xrange(objects):
-		orden1.append([0])
 		orden1[x] = 1.0
 
 
 # Funcion para llenar la matriz de cluster con distancias euclideanas
 def llenarMatriz(matrizCluster, centroides, objectos):
-	for x in xrange(objects):
-		matrizCluster.append([0] * clusters)
-
 	for i in xrange(objects):
 		for j in xrange(clusters - 1):
 			matrizCluster[i][j] = distanciaEuclideana(objetos, centroides, i, j)
@@ -63,17 +65,24 @@ def clustering(matrizCluster):
 			else:
 				matrizCluster[x][y] = indice
 
+# Funcion para calcular el orden de los clusters
+def ordenCluster(orden2, matrizCluster):
+	for x in xrange(objects):
+		orden2[x] = matrizCluster[x][clusters - 1]
 
 # Aqui inicia el algoritmo
 centroides = []
 objetos = []
 orden1 = []
+orden2 = []
 matrizCluster = []
+iniciarEstructuras(centroides, objetos, orden1, orden2, matrizCluster)
 centroidesIniciales(centroides)
 objetosIniciales(objetos)
 ordenInicial(orden1)
 llenarMatriz(matrizCluster, centroides, objetos)
 clustering(matrizCluster)
+ordenCluster(orden2, matrizCluster)
 #while continuar:
 #	continuar = False
-print matrizCluster
+print orden2
