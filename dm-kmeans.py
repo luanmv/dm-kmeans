@@ -2,7 +2,7 @@ import random
 from math import pow
 from math import sqrt
 
-clusters 	= 10
+clusters 	= 3
 objects 	= 10000
 attributes 	= 5
 continuar 	= True
@@ -140,7 +140,7 @@ def mostrarResultados(matrizCluster):
 # Funcion para cambiar el orden
 def swap(orden1, orden2):
 	for x in xrange(objects):
-		orden2[x] = orden1[x]
+		orden1[x] = orden2[x]
 
 # Aqui inicia el algoritmo
 centroides = []
