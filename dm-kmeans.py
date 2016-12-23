@@ -80,9 +80,9 @@ iniciarEstructuras(centroides, objetos, orden1, orden2, matrizCluster)
 centroidesIniciales(centroides)
 objetosIniciales(objetos)
 ordenInicial(orden1)
-llenarMatriz(matrizCluster, centroides, objetos)
-clustering(matrizCluster)
-ordenCluster(orden2, matrizCluster)
-#while continuar:
-#	continuar = False
+while continuar:
+	llenarMatriz(matrizCluster, centroides, objetos)
+	clustering(matrizCluster)
+	ordenCluster(orden2, matrizCluster)
+	continuar = False
 print orden2
