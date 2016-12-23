@@ -127,6 +127,10 @@ def pararAlgoritmo(orden1, orden2):
 	else:
 		return True
 
+# Funcion para impresion de resultados
+def mostrarResultados(matrizCluster):
+	
+
 # Aqui inicia el algoritmo
 centroides = []
 objetos = []
