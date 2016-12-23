@@ -121,7 +121,7 @@ def pararAlgoritmo(orden1, orden2):
 		suma1 += orden1[x]
 		suma2 += orden2[x]
 	resultado = abs(suma1 - suma2)
-	umbral = suma1 * 0.5
+	umbral = suma1 * 0.00000005
 	if resultado > umbral:
 		return False
 	else:
@@ -163,5 +163,5 @@ while continuar:
 		print('Iteraciones: ' + str(i))
 		mostrarResultados(matrizCluster)
 	else:
+		i+=1
 		swap(orden1, orden2)
-print orden2
