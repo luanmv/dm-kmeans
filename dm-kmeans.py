@@ -3,7 +3,7 @@ from math import pow
 from math import sqrt
 
 clusters 	= 10
-objects 	= 100
+objects 	= 10000
 attributes 	= 5
 continuar 	= True
 
@@ -121,7 +121,7 @@ def pararAlgoritmo(orden1, orden2):
 		suma1 += orden1[x]
 		suma2 += orden2[x]
 	resultado = abs(suma1 - suma2)
-	umbral = suma1 * 0.00005
+	umbral = suma1 * 0.5
 	if resultado > umbral:
 		return False
 	else:
@@ -129,7 +129,18 @@ def pararAlgoritmo(orden1, orden2):
 
 # Funcion para impresion de resultados
 def mostrarResultados(matrizCluster):
-	
+	for x in xrange(clusters - 1):
+		contador = 0
+		for y in xrange(objects):
+			if x == matrizCluster[y][clusters - 1]:
+				contador += 1
+		print('Cluster ' + str(x) + ': ' + str(contador))
+
+
+# Funcion para cambiar el orden
+def swap(orden1, orden2):
+	for x in xrange(objects):
+		orden2[x] = orden1[x]
 
 # Aqui inicia el algoritmo
 centroides = []
@@ -150,6 +161,7 @@ while continuar:
 	continuar = pararAlgoritmo(orden1, orden2)
 	if continuar == False:
 		print('Iteraciones: ' + str(i))
+		mostrarResultados(matrizCluster)
 	else:
-		i+=1
+		swap(orden1, orden2)
 print orden2
