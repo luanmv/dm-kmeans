@@ -70,6 +70,63 @@ def ordenCluster(orden2, matrizCluster):
 	for x in xrange(objects):
 		orden2[x] = matrizCluster[x][clusters - 1]
 
+# Funcion para calcular nuevos centroides
+def calcularNuevosCentroides(matrizCluster, objetos, centroides):
+	for i in xrange(clusters - 1):
+		p0 = 0.0
+		p1 = 0.0
+		p2 = 0.0
+		p3 = 0.0
+		p4 = 0.0
+		contador = 0
+		for j in xrange(objects):
+			if matrizCluster[j][clusters-1] == i:
+				contador+=1
+				for k in xrange(attributes):
+					if k == 0:
+						p0 += objetos[j][k]
+					if k == 1:
+						p1 += objetos[j][k]
+					if k == 2:
+						p2 += objetos[j][k]
+					if k == 3:
+						p3 += objetos[j][k]
+					if j == 4:
+						p4 += objetos[j][k]
+		for l in xrange(attributes):
+			if l == 0:
+				centroides[i][l] = centroideValue(p0, contador)
+			if l == 1:
+				centroides[i][l] = centroideValue(p1, contador)
+			if l == 2:
+				centroides[i][l] = centroideValue(p2, contador)
+			if l == 3:
+				centroides[i][l] = centroideValue(p3, contador)
+			if l == 4:
+				centroides[i][l] = centroideValue(p4, contador)
+
+
+# Funcion para obtener el valor del centroide
+def centroideValue(p, contador):
+	if contador == 0:
+		return 0
+	else:
+		return p/contador
+
+# Funcion para detener el algoritmo
+def pararAlgoritmo(orden1, orden2):
+	suma1 = 0.0
+	suma2 = 0.0
+	for x in xrange(objects):
+		suma1 += orden1[x]
+		suma2 += orden2[x]
+	resultado = abs(suma1 - suma2)
+	umbral = suma1 * 0.00005
+	if resultado > umbral:
+		return False
+	else:
+		return True
+
 # Aqui inicia el algoritmo
 centroides = []
 objetos = []
@@ -80,9 +137,15 @@ iniciarEstructuras(centroides, objetos, orden1, orden2, matrizCluster)
 centroidesIniciales(centroides)
 objetosIniciales(objetos)
 ordenInicial(orden1)
+i = 1
 while continuar:
 	llenarMatriz(matrizCluster, centroides, objetos)
 	clustering(matrizCluster)
 	ordenCluster(orden2, matrizCluster)
-	continuar = False
+	calcularNuevosCentroides(matrizCluster, objetos, centroides)
+	continuar = pararAlgoritmo(orden1, orden2)
+	if continuar == False:
+		print('Iteraciones: ' + str(i))
+	else:
+		i+=1
 print orden2
