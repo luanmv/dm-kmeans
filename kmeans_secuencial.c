@@ -12,11 +12,11 @@
 #include <math.h>
 
 /* constantes */
+#define FALSE           0
+#define TRUE            1
 #define CLUSTERS        10
 #define OBJECTS         1000
 #define ATTRIBUTES      5
-#define TRUE            1
-#define FALSE           0
 
 struct Matriz
 {
