@@ -118,7 +118,7 @@ def pararAlgoritmo(orden1, orden2):
 	suma1 = 0.0
 	suma2 = 0.0
 	for x in xrange(objects):
-		suma1 += orden1[x]
+		suma2 += orden2[x]
 		suma1 += orden1[x]
 	resultado = abs(suma1 - suma2)
 	umbral = suma1 * 0.00000005
