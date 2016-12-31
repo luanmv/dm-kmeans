@@ -1,3 +1,4 @@
+# Importando librerias
 import random
 from math import pow
 from math import sqrt
